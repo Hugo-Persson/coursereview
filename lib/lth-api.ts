@@ -71,9 +71,9 @@ export interface StudyPeriod {
   selfStudies: number
 }
 
-type Program = "D"
+export type LTHProgramCode = "D"
 export async function getCourses(
-  program: Program
+  program: LTHProgramCode
 ): Promise<CourseForProgram[]> {
   let url = `https://api.lth.lu.se/lot/courses?programmeCode=${program}&academicYearId=23_24`
   let res = await fetch(url)
@@ -116,10 +116,10 @@ export interface CourseSyllabus {
   originalUrlPdf_sv: string
   originalUrlPdf_en: string
 }
-export async function courseSyllabus(
+export async function getCourseSyllabus(
   courseCode: string
 ): Promise<CourseSyllabus> {
-  let url = `https://api.lth.lu.se/lot/courses/${courseCode}/syllabus`
+  let url = `https://api.lth.lu.se/lot/courses/${courseCode}/syllabus/23_24`
   let res = await fetch(url)
   let json = await res.json()
 

@@ -11,30 +11,57 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+enum Language {
+  English
+  Swedish
+}
+
+enum Cycle {
+  G1
+  G2
+  A
+}
+
+enum Grading {
+  TH
+}
+
 model Course {
-  id             Int              @id @default(autoincrement())
-  name           String
-  description    String
-  courseCode     String
-  faculty        Faculty          @relation(fields: [facultyId], references: [id])
-  credits        Int
-  Review         Review[]
-  Teacher        Teacher          @relation(fields: [teacherId], references: [id])
-  teacherId      Int
-  facultyId      Int
-  Specialization Specialization[]
+  id                      Int              @id @default(autoincrement())
+  nameSv                  String
+  nameEn                  String
+  descriptionSv           String
+  descriptionEn           String
+  coursePageSv            String
+  coursePageEn            String
+  evaluationSv            String
+  evaluationEn            String
+  courseCode              String
+  credits                 Float
+  language                Language
+  reviews                 Review[]
+  courseCoordinator       Teacher          @relation(references: [id], fields: [teacherId])
+  Specialization          Specialization[]
+  teacherId               Int
+  cycle                   Cycle
+  grading                 Grading
+  suitableForeignStudents Boolean
 }
 
 model Specialization {
   id     Int      @id @default(autoincrement())
-  name   String
+  nameSv String
+  nameEn String
   Course Course[]
+
+  Program   Program? @relation(fields: [programId], references: [id])
+  programId Int?
 }
 
-model Faculty {
-  id     Int      @id @default(autoincrement())
-  Course Course[]
-  name   String
+model Program {
+  id             Int              @id @default(autoincrement())
+  name           String
+  Specialization Specialization[]
 }
 
 model User {
@@ -57,9 +84,8 @@ model Review {
 }
 
 model Teacher {
-  id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
-  email     String   @unique
-  Course    Course[]
+  id     Int      @id @default(autoincrement())
+  name   String
+  email  String   @unique
+  Course Course[]
 }
