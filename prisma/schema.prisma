@@ -12,14 +12,29 @@ datasource db {
 }
 
 model Course {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  courseCode  String
-  credits     Int
-  Review      Review[]
-  Teacher     Teacher  @relation(fields: [teacherId], references: [id])
-  teacherId   Int
+  id             Int              @id @default(autoincrement())
+  name           String
+  description    String
+  courseCode     String
+  faculty        Faculty          @relation(fields: [facultyId], references: [id])
+  credits        Int
+  Review         Review[]
+  Teacher        Teacher          @relation(fields: [teacherId], references: [id])
+  teacherId      Int
+  facultyId      Int
+  Specialization Specialization[]
+}
+
+model Specialization {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Course Course[]
+}
+
+model Faculty {
+  id     Int      @id @default(autoincrement())
+  Course Course[]
+  name   String
 }
 
 model User {
