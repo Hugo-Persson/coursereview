@@ -1,21 +1,17 @@
-# next-template
+# About 
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
+The purpose of this project is to create an app where you can search and read about courses at LU, features are:
+- [ ] Search courses
+- [ ] Read description
+- [ ] Create and read reviews
+- [ ] 1-5 star rating
+- [ ] Add courses to favorits
+- [ ] Generate schedule for chosen courses
 
-## Usage
-
-```bash
-npx create-next-app -e https://github.com/shadcn/next-template
-```
-
-## Features
-
-- Next.js 13 App Directory
-- Radix UI Primitives
-- Tailwind CSS
-- Icons from [Lucide](https://lucide.dev)
-- Dark mode with `next-themes`
-- Tailwind CSS class sorting, merging and linting.
+## Tech stack
+- The frontend and backend will be written in Next.js
+- Prisma with postgress will be used for DB
+- Tailwind with Shadcn will be used for UI
 
 ## License
 
